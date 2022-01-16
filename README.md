@@ -1,15 +1,6 @@
-# Basic Sample Hardhat Project
+# Ethereum: The Tribe
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Ethereum: The Tribe, is an NFT collection highlighting players and their realms in the Ethereum Ecosystem.
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+- First Mint: https://testnets.opensea.io/assets/goerli/0xe313db3530f68201b9e9ea2b452b161c52639ff0/0 (Pushed mainnet data)
+- Goerli Contract: https://goerli.etherscan.io/address/0xe313db3530f68201b9e9ea2b452b161c52639ff0

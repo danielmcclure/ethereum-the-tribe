@@ -23,7 +23,6 @@ import NFTViewer from "./components/NFTViewer";
 
 /* Namehash Utility - Thanks to raffy.eth*/
 import {keccak, hex_from_bytes} from '@adraffy/keccak';
-
 function namehash(name) {
   let buf = new Uint8Array(64); 
   if (name.length > 0) {
@@ -100,8 +99,8 @@ const App = () => {
         console.log(await provider.lookupAddress("0xb8c2C29ee19D8307cb7255e1Cd9CbDE883A267d5"));*/
 
         // Dynamic: "+accounts[0]+"
-        //  Address: 0xb8c2c29ee19d8307cb7255e1cd9cbde883a267d5
-        fetch("https://api.etherscan.io/api?module=account&action=tokentx&address=0xC0ffee47752e9C35e95A72757FE92D71155f8077&startblock=0&endblock=999999999&sort=asc&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
+        // Testing Address: 0xb8c2c29ee19d8307cb7255e1cd9cbde883a267d5
+        fetch("https://api.etherscan.io/api?module=account&action=tokentx&address="+accounts[0]+"&startblock=0&endblock=999999999&sort=asc&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
         .then(response => response.json())
         .then(data => {
           let tokenStatus = data["status"];
@@ -128,7 +127,7 @@ const App = () => {
           }
         });
 
-        fetch("https://api.etherscan.io/api?module=account&action=tokennfttx&address=0xC0ffee47752e9C35e95A72757FE92D71155f8077&startblock=0&endblock=999999999&sort=asc&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
+        fetch("https://api.etherscan.io/api?module=account&action=tokennfttx&address="+accounts[0]+"&startblock=0&endblock=999999999&sort=asc&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
         .then(response => response.json())
         .then(data => {
           let nftTokenStatus = data["status"];
@@ -155,8 +154,8 @@ const App = () => {
           }
         });
 
-        // 0x9dd134d14d1e65f84b706d6f205cd5b1cd03a46b
-        fetch("https://api.etherscan.io/api?module=account&action=getminedblocks&address=0xC0ffee47752e9C35e95A72757FE92D71155f8077&blocktype=blocks&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
+        // Testing Address: 0x9dd134d14d1e65f84b706d6f205cd5b1cd03a46b
+        fetch("https://api.etherscan.io/api?module=account&action=getminedblocks&address="+accounts[0]+"&blocktype=blocks&apikey=BBXM93VY2U2Y7WAPT6X53IBVFCWXWXUBF4")
         .then(response => response.json())
         .then(data => {
           let miningStatus = data["status"];
@@ -290,12 +289,14 @@ const App = () => {
       token: process.env.REACT_APP_NFT_STORAGE_API_KEY,
     });
 
-/*    const nameHash1 = namehash(``);
+    /* TODO: Work out how to get ENS Namehash for dynamic image geneation. It works with unnamed version but not named version. 
+    const nameHash1 = namehash(``);
     const nameHash2 = namehash(`eth`);
     const nameHash3 = namehash(`nick`);
     const nameHash = namehash("nick.eth");
     console.log(hex_from_bytes(nameHash));
-*/
+    
+    */
 
     //lets load up this token with some metadata and our image and save it to NFT.storage
     //image contains any File or Blob you want to save
@@ -311,7 +312,7 @@ const App = () => {
           image: new File(
             [
               `${cardheadSVG}<image x="226.8" y="99.6" width="631" height="631" xlink:href="https://metadata.ens.domains/mainnet/0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85/98054760162215087821601516533704482139160916141216464909584436099751031713776/image" />
-        ${cardimageSVG}${tokenStatus}${cardrow1SVG}${nftTokenStatus}${cardrow2SVG}${miningStatus}${cardrow3SVG}0xC0ffee47752e9C35e95A72757FE92D71155f8077${cardfooterSVG}`,
+        ${cardimageSVG}${tokenStatus}${cardrow1SVG}${nftTokenStatus}${cardrow2SVG}${miningStatus}${cardrow3SVG}`+currentAccount+`${cardfooterSVG}`,
             ],
             `ETHTheTribe.svg`,
             {
@@ -396,7 +397,7 @@ const App = () => {
               ...linksObj,
               opensea: `https://testnets.opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`,
               rarible: `https://rinkeby.rarible.com/token/${CONTRACT_ADDRESS}:${tokenId.toNumber()}`,
-              etherscan: `https://rinkeby.etherscan.io/tx/${nftTxn.hash}`,
+              etherscan: `https://goerli.etherscan.io/tx/${nftTxn.hash}`,
             });
           }
         );
